@@ -1,56 +1,57 @@
-package io.nology.to_do_api.category;
+// package io.nology.to_do_api.category;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import io.nology.to_do_api.task.Task;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+// import java.util.ArrayList;
+// import java.util.List;
 
-// id: number
-// category: string
-// task: one2many
+// import io.nology.to_do_api.task.Task;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.OneToMany;
+// import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "categories")
-public class Category {
+// // id: number
+// // category: string
+// // task: one2many
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+// @Entity
+// @Table(name = "categories")
+// public class Category {
 
-    @Column
-    private String category;
+// @Id
+// @GeneratedValue(strategy = GenerationType.IDENTITY)
+// private Long id;
 
-    // @OneToMany(mappedBy = "category")
-    // private List<Task> tasks = new ArrayList<>();
+// @Column
+// private String category;
 
-    public Long getId() {
-        return id;
-    }
+// @OneToMany(mappedBy = "category")
+// private List<Task> tasks = new ArrayList<>();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+// public Long getId() {
+// return id;
+// }
 
-    public String getCategory() {
-        return category;
-    }
+// public void setId(Long id) {
+// this.id = id;
+// }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+// public String getCategory() {
+// return category;
+// }
 
-    // public List<Task> getTasks() {
-    // return tasks;
-    // }
+// public void setCategory(String category) {
+// this.category = category;
+// }
 
-    // public void setTasks(List<Task> tasks) {
-    // this.tasks = tasks;
-    // }
+// public List<Task> getTasks() {
+// return tasks;
+// }
 
-}
+// public void setTasks(List<Task> tasks) {
+// this.tasks = tasks;
+// }
+
+// }

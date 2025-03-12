@@ -1,14 +1,11 @@
 package io.nology.to_do_api.task;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
-import io.nology.to_do_api.category.Category;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 // id: number
@@ -18,14 +15,33 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tasks")
 public class Task {
+    enum Category {
+        CLEANING,
+        PROJECTS,
+        ERRANDS,
+        STUDY,
+        EXERCISE
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // @Column(nullable = true)
     private Long id;
 
     @Column
     private String task;
+
+    @Nullable
+    private Category category;
+
+    private boolean isArchived;
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+    }
 
     public String getTask() {
         return task;
@@ -52,12 +68,12 @@ public class Task {
         return id;
     }
 
-    // @ManyToOne
-    // @JoinColumn(name = "category_id")
-    // private Category category;
+    public Category getCategory() {
+        return category;
+    }
 
-    // public void setCategory(Category category) {
-    // this.category = category;
-    // }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
 }

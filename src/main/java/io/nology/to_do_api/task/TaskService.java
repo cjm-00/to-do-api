@@ -2,28 +2,25 @@ package io.nology.to_do_api.task;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.nology.to_do_api.category.Category;
-import io.nology.to_do_api.category.CategoryService;
-
 @Service
 public class TaskService {
-    // private CategoryService categoryService;
     @Autowired
     private TaskRepository repo;
 
-    public TaskService(TaskRepository repo
-    // , CategoryService categoryService
-    ) {
+    public TaskService(TaskRepository repo) {
         this.repo = repo;
-        // this.categoryService = categoryService;
     }
 
     public List<Task> getAll() {
         return this.repo.findAll();
+    }
+
+    public List<Task> getUnarchived() {
+        return this.repo.findAll().stream().filter((task) -> !task.isArchived()).collect(Collectors.toList());
     }
 
     public Optional<Task> getById(Long id) {
@@ -33,23 +30,31 @@ public class TaskService {
     public Task createTask(CreateTaskDTO data) {
 
         Task newTask = new Task();
-        newTask.setId(data.getId());
-        newTask.setTask(data.getTask().trim());
-        // if (data.getCategoryId() != null) {
-        // Category foundCategory =
-        // this.categoryService.getById(data.getCategoryId()).orElse(null);
-        // newTask.setCategory(foundCategory);
-        // }
+        newTask.setTask(data.getTask());
+        if (data.getCategory() != null) {
+            newTask.setCategory(data.getCategory());
+        }
         return this.repo.save(newTask);
 
     }
 
+    public void updateTask(Long id, UpdateTaskDTO data) {
+        Task task = this.repo.findById(id).get();
+        if (task.getTask() != null) {
+            task.setTask(data.getTask());
+        }
+        if (task.getCategory() != null) {
+            task.setCategory(data.getCategory());
+        }
+
+        repo.save(task);
+    }
+
     //// DONT DELETE / ARCHIVE IT
-    // public void deleteTask(Long id) {
-    // Optional<Task> searchResult = this.getById(id);
-    // if (searchResult != null) {
-    // this.repo.delete(searchResult.get());
-    // }
-    // }
+    public void archiveTask(Long id) throws Exception {
+        Task task = this.repo.findById(id).get();
+        task.setArchived(true);
+        repo.save(task);
+    }
 
 }

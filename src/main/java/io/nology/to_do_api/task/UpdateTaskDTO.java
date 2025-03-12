@@ -1,19 +1,17 @@
 package io.nology.to_do_api.task;
 
 import io.micrometer.common.lang.Nullable;
-import io.nology.to_do_api.task.Task.Category;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import io.nology.to_do_api.task.Task.Category;;
 
-public class CreateTaskDTO {
+public class UpdateTaskDTO {
 
-    @NotBlank(message = "Please enter a task description")
+    @Nullable
     private String task;
 
     @Nullable
     private Category category;
 
-    @NotNull
+    @Nullable
     private boolean isArchived;
 
     public boolean isArchived() {
@@ -39,4 +37,5 @@ public class CreateTaskDTO {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 }
